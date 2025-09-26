@@ -1,6 +1,7 @@
 package com.example.lab8_working
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,16 @@ import kotlin.text.trim
 import kotlin.text.trimIndent
 
 class BudgetFragment : Fragment() {
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Toast.makeText(context, "🔗 BudgetFragment: onAttach()", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Toast.makeText(requireContext(), "🆕 BudgetFragment: onCreate()", Toast.LENGTH_SHORT).show()
+    }
 
     data class BudgetEntry(
         val name: String,
@@ -50,15 +61,52 @@ class BudgetFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Toast.makeText(requireContext(), "📱 BudgetFragment: onCreateView()", Toast.LENGTH_SHORT).show()
         return inflater.inflate(R.layout.fragment_budget, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Toast.makeText(requireContext(), "✅ BudgetFragment: onViewCreated()", Toast.LENGTH_SHORT).show()
 
         setupUserGreeting(view)
         setupButtons(view)
         showDataSummary(view)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Toast.makeText(requireContext(), "▶️ BudgetFragment: onStart()", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(requireContext(), "🟢 BudgetFragment: onResume()", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Toast.makeText(requireContext(), "⏸️ BudgetFragment: onPause()", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Toast.makeText(requireContext(), "⏹️ BudgetFragment: onStop()", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        Toast.makeText(requireContext(), "🗑️ BudgetFragment: onDestroyView()", Toast.LENGTH_SHORT).show()
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Toast.makeText(requireContext(), "💥 BudgetFragment: onDestroy()", Toast.LENGTH_SHORT).show()
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        Toast.makeText(requireContext(), "🔓 BudgetFragment: onDetach()", Toast.LENGTH_SHORT).show()
+        super.onDetach()
     }
 
     private fun setupUserGreeting(view: View) {
