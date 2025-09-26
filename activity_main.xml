@@ -17,10 +17,42 @@
         android:layout_marginBottom="18dp"
         android:scaleType="fitCenter" />
 
+    <!-- Navigation Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/btnBudget"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:text="💰 Budget"
+            android:textSize="14sp"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="10dp"
+            android:enabled="false" />
+
+        <Button
+            android:id="@+id/btnProfile"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:text="👤 Profile"
+            android:textSize="14sp"
+            android:backgroundTint="#2196F3"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="10dp" />
+
+    </LinearLayout>
+
     <!-- Fragment Container -->
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
