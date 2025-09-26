@@ -1,6 +1,7 @@
 package com.example.lab8_working
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +25,29 @@ class MainActivity : AppCompatActivity() {
         btnProfile.setOnClickListener {
             switchToFragment("profile")
         }
+
+        // Handle back button press
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (supportFragmentManager.backStackEntryCount > 1) {
+                    supportFragmentManager.popBackStack()
+                    // Update button states based on current fragment
+                    val currentFragment = supportFragmentManager.fragments.lastOrNull()
+                    when (currentFragment) {
+                        is BudgetFragment -> {
+                            btnBudget.isEnabled = false
+                            btnProfile.isEnabled = true
+                        }
+                        is UserProfileFragment -> {
+                            btnBudget.isEnabled = true
+                            btnProfile.isEnabled = false
+                        }
+                    }
+                } else {
+                    finish()
+                }
+            }
+        })
 
         // Load the budget fragment initially if no saved instance state
         if (savedInstanceState == null) {
@@ -50,25 +74,5 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainer, fragment)
             .addToBackStack(null)
             .commit()
-    }
-    
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 1) {
-            supportFragmentManager.popBackStack()
-            // Update button states based on current fragment
-            val currentFragment = supportFragmentManager.fragments.lastOrNull()
-            when (currentFragment) {
-                is BudgetFragment -> {
-                    btnBudget.isEnabled = false
-                    btnProfile.isEnabled = true
-                }
-                is UserProfileFragment -> {
-                    btnBudget.isEnabled = true
-                    btnProfile.isEnabled = false
-                }
-            }
-        } else {
-            super.onBackPressed()
-        }
     }
 }
